@@ -1,0 +1,25 @@
+body {
+  padding-top: 70px;
+  font-size: 16px;
+}
+
+.navbar {
+    opacity: 0.75;
+}
+
+.form-login-div h3 {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.form-login-div .btn-default {
+    cursor: pointer;
+    padding: 7px 10px;
+    width: 80%;
+    margin-left: 10%;
+}
+
+.form-login-div input {
+    padding: 10px 15px;
+}
