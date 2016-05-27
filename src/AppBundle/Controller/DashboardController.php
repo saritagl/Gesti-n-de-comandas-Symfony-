@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Controller\Dashboard;
+namespace AppBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -12,7 +12,6 @@ use AppBundle\Entity\Post;
 /**
  * @Route("/dashboard")
  */
-
 class DashboardController extends Controller
 {
     /**
@@ -24,8 +23,7 @@ class DashboardController extends Controller
         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw $this->createAccessDeniedException();
         }
-        $user = $this->getUser();
-        $role = strtolower( substr( $user->getRoles()[0], 5 ) );
-        return $this->render( $role . '/index.html.twig');
+
+        return $this->render( 'dashboard/layout.html.twig');
     }
 }

@@ -1,0 +1,17 @@
+{% extends 'dashboard/layout.html.twig' %}
+
+{% block panel_heading %}Detalles de comida{% endblock %}
+{% block panel_body %}
+
+    {{ include('form_field.html.twig', { 'label': 'Nombre', 'tag':'input', 'value': product.name }) }}
+    {{ include('form_field.html.twig', { 'label': 'Precio', 'tag':'input', 'value': product.price }) }}
+    {{ include('form_field.html.twig', { 'label': 'Descripción', 'tag':'textarea', 'value': product.description }) }}
+    {{ include('form_field.html.twig', { 'label': 'Categoría', 'tag':'input', 'value': product.category.name }) }}
+    <div>
+        {{ form_start(delete_form) }}
+            <a href="{{ path('product_index') }}" class="btn btn-default">Volver al listado</a>
+            <a href="{{ path('product_edit', { 'id': product.id }) }}" class="btn btn-default">Modificar</a>
+            <input type="submit" class="btn btn-default" value="Eliminar">
+        {{ form_end(delete_form) }}
+    </div>
+{% endblock %}

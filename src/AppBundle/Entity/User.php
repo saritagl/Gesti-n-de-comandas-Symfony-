@@ -2,9 +2,14 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
 /**
+ * @ORM\Entity
+ * @UniqueEntity(fields="email", message="Email already taken")
+ * @UniqueEntity(fields="username", message="Username already taken")
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="AppBundle\Entity\UserRepository")
  * @ORM\HasLifecycleCallbacks
@@ -24,9 +29,25 @@ class User implements AdvancedUserInterface, \Serializable
     private $username;
 
     /**
+     * @ORM\Column(name="salt", type="string", length=40)
+     */
+    private $salt;
+
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Length(max=4096)
+     */
+    private $plainPassword;
+
+    /**
      * @ORM\Column(type="string", length=64)
      */
     private $password;
+
+    /**
+     * @ORM\Column(type="string", length=64)
+     */
+    private $lastRole;
 
     /**
      * @ORM\Column(type="json_array")
@@ -60,8 +81,7 @@ class User implements AdvancedUserInterface, \Serializable
             $this->setModified(new \DateTime());
         }
         $this->isActive = true;
-        // may not be needed, see section on salt below
-        // $this->salt = md5(uniqid(null, true));
+        $this->salt = md5(uniqid(null, true));
     }
 
     /**
@@ -73,16 +93,31 @@ class User implements AdvancedUserInterface, \Serializable
         $this->setModified(new \DateTime());
     }
 
+    public function getId()
+    {
+        return $this->id;
+    }
+
     public function getUsername()
     {
         return $this->username;
     }
 
-    public function getSalt()
+    public function setUsername($username)
     {
-        // you *may* need a real salt depending on your encoder
-        // see section on salt below
-        return null;
+        $this->username = $username;
+        return $this;
+    }
+
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword($plainPassword)
+    {
+        $this->plainPassword = $plainPassword;
+        return $this;
     }
 
     public function getPassword()
@@ -90,162 +125,86 @@ class User implements AdvancedUserInterface, \Serializable
         return $this->password;
     }
 
-    /**
-     * Returns the roles or permissions granted to the user for security.
-     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+        return $this;
+    }
+
+    public function getLastRole()
+    {
+        return $this->lastRole;
+    }
+
+    public function setLastRole($lastRole)
+    {
+        $this->lastRole = $lastRole;
+        return $this;
+    }
+
     public function getRoles()
     {
         $roles = $this->roles;
-
         // guarantees that a user always has at least one role for security
         if (empty($roles)) {
-            $roles[] = 'ROLE_USER';
+            $roles[] = 'user';
         }
-
         return array_unique($roles);
     }
 
     public function setRoles(array $roles)
     {
         $this->roles = $roles;
-    }
-
-    public function eraseCredentials()
-    {
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set username
-     *
-     * @param string $username
-     *
-     * @return User
-     */
-    public function setUsername($username)
-    {
-        $this->username = $username;
-
         return $this;
     }
 
-    /**
-     * Set password
-     *
-     * @param string $password
-     *
-     * @return User
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    /**
-     * Set email
-     *
-     * @param string $email
-     *
-     * @return User
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * Get email
-     *
-     * @return string
-     */
     public function getEmail()
     {
         return $this->email;
     }
 
-    /**
-     * Set isActive
-     *
-     * @param boolean $isActive
-     *
-     * @return User
-     */
-    public function setIsActive($isActive)
+    public function setEmail($email)
     {
-        $this->isActive = $isActive;
-
+        $this->email = $email;
         return $this;
     }
 
-    /**
-     * Get isActive
-     *
-     * @return boolean
-     */
     public function getIsActive()
     {
         return $this->isActive;
     }
 
-    /**
-     * Set created
-     *
-     * @param \DateTime $created
-     *
-     * @return User
-     */
-    public function setCreated($created)
+    public function setIsActive($isActive)
     {
-        $this->created = $created;
-
+        $this->isActive = $isActive;
         return $this;
     }
 
-    /**
-     * Get created
-     *
-     * @return \DateTime
-     */
     public function getCreated()
     {
         return $this->created;
     }
 
-    /**
-     * Set modified
-     *
-     * @param \DateTime $modified
-     *
-     * @return User
-     */
-    public function setModified($modified)
+    public function setCreated($created)
     {
-        $this->modified = $modified;
-
+        $this->created = $created;
         return $this;
     }
 
-    /**
-     * Get modified
-     *
-     * @return \DateTime
-     */
     public function getModified()
     {
         return $this->modified;
+    }
+
+    public function setModified($modified)
+    {
+        $this->modified = $modified;
+        return $this;
+    }
+
+    public function getSalt()
+    {
+        return $this->salt;
     }
 
     public function isAccountNonExpired()
@@ -277,6 +236,7 @@ class User implements AdvancedUserInterface, \Serializable
             $this->isActive
         ));
     }
+
     public function unserialize($serialized)
     {
         list (
@@ -285,6 +245,25 @@ class User implements AdvancedUserInterface, \Serializable
             $this->password,
             $this->isActive
         ) = unserialize($serialized);
+    }
+
+    public function eraseCredentials()
+    {
+    }
+
+
+    /**
+     * Set salt
+     *
+     * @param string $salt
+     *
+     * @return User
+     */
+    public function setSalt($salt)
+    {
+        $this->salt = $salt;
+
+        return $this;
     }
 
 }

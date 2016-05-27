@@ -1,0 +1,13 @@
+{% extends 'dashboard/layout.html.twig' %}
+
+{% block panel_heading %}Detalles de categoría{% endblock %}
+{% block panel_body %}
+    {{ include('form_field.html.twig', { 'label': 'Nombre', 'tag':'input', 'value': category.name }) }}
+    {{ include('form_field.html.twig', { 'label': 'Descripción', 'tag':'textarea', 'value': category.description }) }}
+    {{ form_start(delete_form) }}
+        <a href="{{ path('category_index') }}" class="btn btn-default">Volver al listado</a>
+        <a href="{{ path('category_edit', { 'id': category.id }) }}" class="btn btn-default">Modificar</a>
+        <input type="submit" class="btn btn-default" value="Eliminar">
+    {{ form_end(delete_form) }}
+    </div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'dashboard/layout.html.twig' %}
+{%  form_theme form 'form_row.html.twig' %}
+
+{% block panel_heading %}Editar categoría{% endblock %}
+{% block panel_body %}
+
+    {{ form_start(form) }}
+        {{ form_row(form.name) }}
+        {{ form_row(form.description) }}
+
+        <div class="form-group">
+            <div>
+                <a href="{{ path('category_index') }}" class="btn btn-default">Volver al listado</a>
+                {{ form_widget(form.save, {'attr': {'class': 'btn btn-default'}}) }}
+                {{ form_widget(form.delete, {'attr': {'class': 'btn btn-default'}}) }}
+            </div>
+        </div>
+    {{ form_end(form) }}
+
+{% endblock %}

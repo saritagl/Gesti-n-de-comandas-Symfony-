@@ -1,0 +1,31 @@
+
+<div class="col-sm-3">
+    {{ app.user.username }} <hr>
+    <ul class="nav nav-stacked">
+        <li class="nav-header">
+            <ul class="nav nav-stacked collapse in" id="userMenu">
+                {% block sidebar_options %}
+
+                    {% if app.user.lastRole == 'admin' %}
+                        <li><a href="{{ path('user_index') }}"><i class="glyphicon glyphicon-user"></i> Usuarios</a></li>
+                        <li><a href="{{ path('product_index') }}"><i class="glyphicon glyphicon-apple"></i> Comidas</a></li>
+                        <li><a href="{{ path('category_index') }}"><i class="glyphicon glyphicon-th-large"></i> Categorias</a></li>
+                        <li><a href="{{ path('table_index') }}"><i class="glyphicon glyphicon-minus"></i> Mesas</a></li>
+                        <li><a href="{{ path('client_index') }}"><i class="glyphicon glyphicon-star-empty"></i> Clientes</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-stats"></i> Estadísticas</a></li>
+                    {% endif %}
+
+                    {% if app.user.lastRole == 'server' %}
+                        <li><a href=""><i class="glyphicon glyphicon-th-list"></i> Mesas disponibles</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-stats"></i> Estadísticas</a></li>
+                    {% endif %}
+
+                    <li><a href="{{ path('security_update_password') }}"><i class="glyphicon glyphicon-refresh"></i> Contraseña</a></li>
+                    <li><a href="{{ path('security_logout') }}"><i class="glyphicon glyphicon-off"></i> Logout</a></li>
+
+                {% endblock %}
+            </ul>
+        </li>
+    </ul>
+    <hr>
+</div>

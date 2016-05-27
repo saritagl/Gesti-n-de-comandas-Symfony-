@@ -1,0 +1,21 @@
+body {
+    padding-top: 0px;
+}
+
+.navbar { opacity: 1.0; }
+
+.nav > li > a {
+    color:#787878;
+}
+
+.nav > li > a:hover {
+    cursor:pointer
+}
+
+label {
+    font-weight: 400;
+}
+
+.roles-dropdown {
+    display: inline;
+}

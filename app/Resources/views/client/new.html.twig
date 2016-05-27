@@ -1,0 +1,19 @@
+{% extends 'dashboard/layout.html.twig' %}
+{%  form_theme form 'form_row.html.twig' %}
+
+{% block panel_heading %}Adición de cliente{% endblock %}
+{% block panel_body %}
+
+    {{ form_start(form) }}
+        {{ form_row(form.ci) }}
+        {{ form_row(form.name) }}
+
+        <div class="form-group">
+            <div>
+                <a  href="{{ path('client_index') }}" class="btn btn-default">Volver al listado</a>
+                {{ form_widget(form.save, {'attr': {'class': 'btn btn-default'}}) }}
+            </div>
+        </div>
+    {{ form_end(form) }}
+
+{% endblock %}

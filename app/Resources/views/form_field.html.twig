@@ -1,0 +1,10 @@
+<div class='form-group'>
+    <label class='control-label'>{{ label }}</label>
+    <div>
+        {% if tag == 'input' %}
+            <{{ tag }} class='form-control' disabled='disabled' value='{{value}}'/>
+        {% else %}
+            <{{ tag }} class='form-control' disabled='disabled'>{{value}}</{{ tag }}>
+        {% endif %}
+    </div>
+</div>

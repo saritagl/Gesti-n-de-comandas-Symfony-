@@ -1,0 +1,33 @@
+{% extends 'dashboard/layout.html.twig' %}
+
+{% block panel_heading %}Lista de clientes{% endblock %}
+{% block panel_body %}
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Cédula</th>
+                    <th>Nombre</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for client in clients %}
+                <tr>
+                    <td>{{ client.ci }}</td>
+                    <td>{{ client.name }}</td>
+                    <td>
+                        <a href="{{ path('client_edit', { 'id': client.id }) }}" >
+                            <i class="glyphicon glyphicon-edit"></i>modificar
+                        </a>
+                        <a href="{{ path('client_show', { 'id': client.id }) }}" >
+                            <i class="glyphicon glyphicon-search"></i>detalles
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <a class="btn btn-default" href="{{ path('client_new') }}">Agregar cliente</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'dashboard/layout.html.twig' %}
+{%  form_theme form 'form_row.html.twig' %}
+
+{% block panel_heading %}Adición de mesa{% endblock %}
+{% block panel_body %}
+
+    {{ form_start(form) }}
+        {{ form_row(form.number) }}
+        {{ form_row(form.chairNumber) }}
+        {{ form_row(form.isAvailable) }}
+
+        <div class="form-group">
+            <div>
+                <a  href="{{ path('table_index') }}" class="btn btn-default">Volver al listado</a>
+                {{ form_widget(form.save, {'attr': {'class': 'btn btn-default'}}) }}
+            </div>
+        </div>
+    {{ form_end(form) }}
+
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'dashboard/layout.html.twig' %}
+
+{% block panel_heading %}Lista de comidas{% endblock %}
+{% block panel_body %}
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Categoría</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for product in products %}
+                <tr>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.price }}</td>
+                    <td>{{ product.category.name }}</td>
+                    <td>
+                        <a href="{{ path('product_edit', { 'id': product.id }) }}" >
+                            <i class="glyphicon glyphicon-edit"></i>modificar
+                        </a>
+                        <a href="{{ path('product_show', { 'id': product.id }) }}" >
+                            <i class="glyphicon glyphicon-search"></i>detalles
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <a class="btn btn-default" href="{{ path('product_new') }}">Agregar comida</a>
+    </div>
+{% endblock %}

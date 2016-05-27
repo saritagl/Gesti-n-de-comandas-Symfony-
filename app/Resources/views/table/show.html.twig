@@ -1,0 +1,20 @@
+{% extends 'dashboard/layout.html.twig' %}
+
+{% block panel_heading %}Detalles de mesa{% endblock %}
+{% block panel_body %}
+    {{ include('form_field.html.twig', { 'label': 'Id', 'tag':'input', 'value': table.id }) }}
+    {{ include('form_field.html.twig', { 'label': 'Sillas', 'tag':'input', 'value': table.chairNumber }) }}
+    <div class='form-group'>
+        <label class='control-label'>Disponible</label>
+        <div>
+            <input class='form-control' disabled='disabled'
+                value='{% if table.isAvailable %}Sí{% else %}No{% endif %}'/>
+        </div>
+    </div>
+    {{ form_start(delete_form) }}
+        <a href="{{ path('table_index') }}" class="btn btn-default">Volver al listado</a>
+        <a href="{{ path('table_edit', { 'id': table.id }) }}" class="btn btn-default">Modificar</a>
+        <input type="submit" class="btn btn-default" value="Eliminar">
+    {{ form_end(delete_form) }}
+    </div>
+{% endblock %}

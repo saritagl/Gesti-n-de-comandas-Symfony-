@@ -1,0 +1,35 @@
+{% extends 'dashboard/layout.html.twig' %}
+
+{% block panel_heading %}Lista de mesas{% endblock %}
+{% block panel_body %}
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Number</th>
+                    <th>Sillas</th>
+                    <th>Disponible</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for table in tables %}
+                <tr>
+                    <td>{{ table.number }}</td>
+                    <td>{{ table.chairNumber }}</td>
+                    <td>{% if table.isAvailable %}Sí{% else %}No{% endif %}</td>
+                    <td>
+                        <a href="{{ path('table_edit', { 'id': table.id }) }}" >
+                            <i class="glyphicon glyphicon-edit"></i>modificar
+                        </a>
+                        <a href="{{ path('table_show', { 'id': table.id }) }}" >
+                            <i class="glyphicon glyphicon-search"></i>detalles
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <a class="btn btn-default" href="{{ path('table_new') }}">Agregar mesa</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'dashboard/layout.html.twig' %}
+
+{% block panel_heading %}Lista de categorías{% endblock %}
+{% block panel_body %}
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for category in categories %}
+                <tr>
+                    <td>{{ category.name }}</td>
+                    <td>{{ category.description }}</td>
+                    <td>
+                        <a href="{{ path('category_edit', { 'id': category.id }) }}" >
+                            <i class="glyphicon glyphicon-edit"></i>modificar
+                        </a>
+                        <a href="{{ path('category_show', { 'id': category.id }) }}" >
+                            <i class="glyphicon glyphicon-search"></i>detalles
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <a class="btn btn-default" href="{{ path('category_new') }}">Agregar categoría</a>
+    </div>
+{% endblock %}
