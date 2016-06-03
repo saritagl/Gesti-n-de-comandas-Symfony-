@@ -2,7 +2,7 @@
 
 {% block panel_heading %}Detalles de mesa{% endblock %}
 {% block panel_body %}
-    {{ include('form_field.html.twig', { 'label': 'Id', 'tag':'input', 'value': table.id }) }}
+    {{ include('form_field.html.twig', { 'label': 'Número', 'tag':'input', 'value': table.id }) }}
     {{ include('form_field.html.twig', { 'label': 'Sillas', 'tag':'input', 'value': table.chairNumber }) }}
     <div class='form-group'>
         <label class='control-label'>Disponible</label>

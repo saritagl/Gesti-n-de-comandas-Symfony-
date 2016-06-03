@@ -1,0 +1,24 @@
+<div>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Número</th>
+                    <th>Mesa</th>
+                    <th>Subtotal</th>
+                    <th>IVA</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.table.number }}</td>
+                    <td>{{ order.total }}</td>
+                    <td>{{ order.total * 0.12 }}</td>
+                    <td>{{ order.total * 1.12 }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

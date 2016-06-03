@@ -72,9 +72,6 @@ class SecurityController extends Controller
             throw $this->createAccessDeniedException();
         }
 
-        $session = $request->getSession();
-        $data['msg'] = "";
-
         if ($request->getMethod() == 'POST') {
             $old_pwd = $request->get('old_password');
             $new_pwd = $request->get('new_password');
@@ -82,14 +79,11 @@ class SecurityController extends Controller
             $user = $this->getUser();
             $encoder  = $this->get('security.encoder_factory')->getEncoder($user);
 
-            /*if (!password_verify($old_pwd, $user->getPassword())) {
-              // the above statement have to be used strictly with bcrypt //
-              // the statement below is encrypt method agnostic */
             if(!$encoder->isPasswordValid($user->getPassword(), $old_pwd, $user->getSalt()) ) {
-                $data['msg'] = "Wrong old password! ";
+                $this->addFlash('notice', 'Contraseña incorrecta!');
             } else {
                 if( $new_pwd != $rep_pwd) {
-                    $data['msg'] = "Last two password inputs are diferent";
+                    $this->addFlash('notice', 'Las contraseñas no coinciden!');
                 } else {
                     $new_pwd_encoded = $encoder->encodePassword($new_pwd, $user->getSalt());
                     $user->setPassword($new_pwd_encoded);
@@ -97,13 +91,12 @@ class SecurityController extends Controller
                     $manager->persist($user);
 
                     $manager->flush();
-                    $data['msg'] = "Password changed successfully!";
+                    $this->addFlash('notice', 'Cambio de contraseña exitoso!');
                 }
             }
-            return $this->render('security/update_password.html.twig', array('data' => $data));
         }
 
-        return $this->render('security/update_password.html.twig', array('data' => $data));
+        return $this->render('security/update_password.html.twig');
     }
 
     /**

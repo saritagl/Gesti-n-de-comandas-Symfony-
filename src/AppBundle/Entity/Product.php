@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity
  * @ORM\Table(name="product")
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\ProductRepository")
  */
 class Product
 {
@@ -36,6 +37,16 @@ class Product
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      */
     private $category;
+
+    /**
+     * @ORM\OneToMany(targetEntity="OrderItem", mappedBy="product")
+     */
+    private $onGoingSales;
+
+    /**
+     * @ORM\OneToMany(targetEntity="InvoiceItem", mappedBy="product")
+     */
+    private $sales;
 
     /**
      * Get id
@@ -141,5 +152,80 @@ class Product
     public function getCategory()
     {
         return $this->category;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->sales = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add sale
+     *
+     * @param \AppBundle\Entity\InvoiceItem $sale
+     *
+     * @return Product
+     */
+    public function addSale(\AppBundle\Entity\InvoiceItem $sale)
+    {
+        $this->sales[] = $sale;
+
+        return $this;
+    }
+
+    /**
+     * Remove sale
+     *
+     * @param \AppBundle\Entity\InvoiceItem $sale
+     */
+    public function removeSale(\AppBundle\Entity\InvoiceItem $sale)
+    {
+        $this->sales->removeElement($sale);
+    }
+
+    /**
+     * Get sales
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSales()
+    {
+        return $this->sales;
+    }
+
+    /**
+     * Add onGoingSale
+     *
+     * @param \AppBundle\Entity\OrderItem $onGoingSale
+     *
+     * @return Product
+     */
+    public function addOnGoingSale(\AppBundle\Entity\OrderItem $onGoingSale)
+    {
+        $this->onGoingSales[] = $onGoingSale;
+
+        return $this;
+    }
+
+    /**
+     * Remove onGoingSale
+     *
+     * @param \AppBundle\Entity\OrderItem $onGoingSale
+     */
+    public function removeOnGoingSale(\AppBundle\Entity\OrderItem $onGoingSale)
+    {
+        $this->onGoingSales->removeElement($onGoingSale);
+    }
+
+    /**
+     * Get onGoingSales
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOnGoingSales()
+    {
+        return $this->onGoingSales;
     }
 }

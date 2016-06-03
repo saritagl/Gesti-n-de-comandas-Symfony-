@@ -1,0 +1,22 @@
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Mesa</th>
+                <th># Meseros</th>
+                <th># Facturas</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for row in rows %}
+            <tr>
+                <td>{{ row.table_number }}</td>
+                <td>{{ row.servers }}</td>
+                <td>{{ row.invoices }}</td>
+                <td>{{ row.total }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>

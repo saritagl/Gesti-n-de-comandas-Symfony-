@@ -6,6 +6,8 @@ use Doctrine\Common\Persistence\ObjectManager;
 use AppBundle\Entity\User;
 use AppBundle\Entity\Product;
 use AppBundle\Entity\Category;
+use AppBundle\Entity\Client;
+use AppBundle\Entity\Table;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 
@@ -18,7 +20,9 @@ class LoadFixtures implements FixtureInterface, ContainerAwareInterface
     {
         $this->loadUsers($manager);
         $this->loadMenu($manager);
-        //$this->loadClients($manager);
+        $this->loadClients($manager);
+        $this->loadTables($manager);
+        //$this->loadOrders($manager);
     }
 
     public function loadUsers(ObjectManager $manager)
@@ -86,6 +90,37 @@ class LoadFixtures implements FixtureInterface, ContainerAwareInterface
         $productRedVelvet->setDescription('...');
         $productRedVelvet->setCategory($categoryDessert);
         $manager->persist($productRedVelvet);
+
+        $manager->flush();
+    }
+
+    public function loadClients(ObjectManager $manager)
+    {
+        $clientBob = new Client();
+        $clientBob->setCi('13900943');
+        $clientBob->setName('Bob');
+        $manager->persist($clientBob);
+
+        $clientJohn = new Client();
+        $clientJohn->setCi('18543800');
+        $clientJohn->setName('John');
+        $manager->persist($clientJohn);
+
+        $manager->flush();
+    }
+
+    public function loadTables(ObjectManager $manager){
+        $tableOne = new Table();
+        $tableOne->setNumber(1);
+        $tableOne->setChairNumber(4);
+        $tableOne->setIsAvailable(True);
+        $manager->persist($tableOne);
+
+        $tableTwo = new Table();
+        $tableTwo->setNumber(2);
+        $tableTwo->setChairNumber(6);
+        $tableTwo->setIsAvailable(True);
+        $manager->persist($tableTwo);
 
         $manager->flush();
     }

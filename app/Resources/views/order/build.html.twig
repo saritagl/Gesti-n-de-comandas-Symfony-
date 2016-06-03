@@ -1,0 +1,24 @@
+{% extends 'dashboard/layout.html.twig' %}
+{%  form_theme form 'form_row.html.twig' %}
+
+{% block panel_heading %}Creación de orden{% endblock %}
+{% block panel_body %}
+    {{ include('order/show.html.twig', { 'order': order }) }}
+    {{ include('order/items.html.twig', { 'items': items }) }}
+    <div>
+        {{ form_start(form) }}
+            <div class="row">
+                <div class="col-md-6">{{ form_row(form.product) }}</div>
+                <div class="col-md-6">{{ form_row(form.amount) }}</div>
+            </div>
+            <div class="form-group">
+                <div>
+                    {{ form_widget(form.addProduct, {'attr': {'class': 'btn btn-default'}}) }}
+                    <a class="btn btn-default" href="{{ path('order_close', {'id': order.id}) }}">
+                        Cerrar orden
+                    </a>
+                </div>
+            </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

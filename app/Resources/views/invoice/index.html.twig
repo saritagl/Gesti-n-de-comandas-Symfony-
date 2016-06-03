@@ -1,0 +1,67 @@
+{% extends 'dashboard/layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-datetimepicker.min.css') }}">
+{% endblock %}
+
+{% block panel_heading %}Ingresos detallados{% endblock %}
+{% block panel_body %}
+    <form>
+        <div class="row">
+            <div class="col-md-6 form-group">
+                <label class="control-label">Período: </label>
+                <select class="form-control" name="term" id="term">
+                    <option value="today">Hoy</option>
+                    <option value="yesterday">Ayer</option>
+                    <option value="current month">Este mes</option>
+                    <option value="last month">Mes anterior</option>
+                    <option value="custom">Otro</option>
+                </select>
+            </div>
+            <div class="col-md-6 form-group">
+                <label class="control-label">Según: </label>
+                <select class="form-control" name="type" id="type">
+                    <option value="server">Mesero</option>
+                    <option value="table">Mesa</option>
+                    <option value="total">Total</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Desde:</label>
+                    <div class="input-group date" id="picker-from">
+                        <input type="text" class="form-control" disabled="disabled"/>
+                        <span class="input-group-addon">
+                            <span class="glyphicon-calendar glyphicon"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Hasta:</label>
+                    <div class="input-group date" id="picker-to">
+                        <input type="text" class="form-control" disabled="disabled"/>
+                        <span class="input-group-addon">
+                            <span class="glyphicon-calendar glyphicon"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <input id="submit" class="btn btn-default" value="Ver reporte">
+        </div>
+        <div id="report"></div>
+    </form>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/moment.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap-datetimepicker.min.js') }}"></script>
+    <script src="{{ asset('js/report.js') }}"></script>
+{% endblock %}

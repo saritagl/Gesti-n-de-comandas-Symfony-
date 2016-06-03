@@ -1,0 +1,17 @@
+{% extends 'dashboard/layout.html.twig' %}
+
+{% block panel_heading %}Apertura de orden{% endblock %}
+{% block panel_body %}
+    <form method="post">
+        <div class="form-group">
+            <label class="control-label">Mesa</label>
+            <div><input class="control-form" name="table" value=""></div>
+        </div>
+        <div class="form-group">
+            <div>
+                <input type="submit" class="btn btn-default" value="Abrir orden">
+            </div>
+        </div>
+    </form>
+    {{ include('_flash_messages.html.twig') }}
+{% endblock %}

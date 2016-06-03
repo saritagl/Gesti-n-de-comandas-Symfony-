@@ -19,3 +19,19 @@ label {
 .roles-dropdown {
     display: inline;
 }
+
+#accordion > .panel > a {
+    text-decoration: none;
+    color: #333;
+}
+
+#accordion .panel .panel-heading i {
+    margin-right: 10px;
+}
+
+.alert {
+    border: solid 2px #ef7359;
+    padding: 5px;
+    color: #ef7359;
+    background-color: #FEFEFE;
+}

@@ -1,0 +1,32 @@
+{% extends 'dashboard/layout.html.twig' %}
+
+{% block panel_heading %}Lista de órdenes abiertas{% endblock %}
+{% block panel_body %}
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Número</th>
+                    <th>Mesa</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for order in orders %}
+                <tr>
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.table.number }}</td>
+                    <td>
+                        <a href="{{ path('order_build', { 'id': order.id }) }}" >
+                            <i class="glyphicon glyphicon-edit"></i>modificar
+                        </a>
+                        <a href="{{ path('order_close', { 'id': order.id }) }}" >
+                            <i class="glyphicon glyphicon-check"></i>cerrar
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

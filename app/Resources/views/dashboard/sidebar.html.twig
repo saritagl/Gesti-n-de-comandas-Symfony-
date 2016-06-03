@@ -12,11 +12,12 @@
                         <li><a href="{{ path('category_index') }}"><i class="glyphicon glyphicon-th-large"></i> Categorias</a></li>
                         <li><a href="{{ path('table_index') }}"><i class="glyphicon glyphicon-minus"></i> Mesas</a></li>
                         <li><a href="{{ path('client_index') }}"><i class="glyphicon glyphicon-star-empty"></i> Clientes</a></li>
-                        <li><a href="#"><i class="glyphicon glyphicon-stats"></i> Estadísticas</a></li>
+                        <li><a href="{{ path('invoice_index')}}"><i class="glyphicon glyphicon-stats"></i> Ingresos</a></li>
                     {% endif %}
 
                     {% if app.user.lastRole == 'server' %}
-                        <li><a href=""><i class="glyphicon glyphicon-th-list"></i> Mesas disponibles</a></li>
+                        <li><a href="{{ path('order_open') }}"><i class="glyphicon glyphicon-plus"></i> Abrir una orden</a></li>
+                        <li><a href="{{ path('order_index')}}"><i class="glyphicon glyphicon-th-list"></i> Órdenes abiertas</a></li>
                         <li><a href="#"><i class="glyphicon glyphicon-stats"></i> Estadísticas</a></li>
                     {% endif %}
 

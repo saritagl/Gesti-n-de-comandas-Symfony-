@@ -1,0 +1,32 @@
+{% extends 'dashboard/layout.html.twig' %}
+
+{% block panel_heading %}Cerrar orden{% endblock %}
+{% block panel_body %}
+    {{ include('order/show.html.twig', { 'order': order }) }}
+    <form method="post" onkeypress="return event.keyCode != 13">
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label class="control-label">Cédula del cliente</label>
+                <div class="input-group">
+                    <input id="client-ci" class="form-control" name="ci" value="">
+                    <span id="search-btn" class="input-group-btn">
+                        <a class="btn btn-default"><i class="glyphicon glyphicon-search"></i></a>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <label class="control-label">Nombre del cliente</label>
+                <input id="client-name" class="form-control" disabled="disabled">
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="submit" name="save" class="btn btn-default" value="Cerrar orden">
+        </div>
+    </form>
+    {{ include('_flash_messages.html.twig') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/close-order.js') }}"></script>
+{% endblock %}

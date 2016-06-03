@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -63,11 +64,24 @@ class ClientController extends Controller
     /**
      * Finds and displays a Client entity.
      *
-     * @Route("/{id}", name="client_show")
+     * @Route(
+     *     "/{id}/{field}", name="client_show",
+     *     defaults={"field": "id"},
+     *     requirements={"field": "id|ci"}
+     * )
+     *
      * @Method("GET")
      */
-    public function showAction(Client $client)
+    public function showAction(Request $request, $id, $field)
     {
+        $rep = $this->getDoctrine()->getRepository('AppBundle:Client');
+
+        if($request->get('attr') == 'name' && $field == 'ci'){
+            return new Response($rep->findOneByCi($id)->getName());
+        }
+
+        $client =  $rep->find($id);
+
         $deleteForm = $this->createDeleteForm($client);
 
         return $this->render('client/show.html.twig', array(
