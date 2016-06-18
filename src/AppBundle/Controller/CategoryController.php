@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -142,4 +143,16 @@ class CategoryController extends Controller
             ->getForm()
         ;
     }
+
+    /**
+     * @return \AppBundle\Entity\Category[]|array
+     */
+    public function getAllCategories()
+    {
+        $em = self::getDoctrine()->getManager();
+        $categories = $em->getRepository('AppBundle:Category')->findAll();
+
+        return $categories;
+    }
+
 }

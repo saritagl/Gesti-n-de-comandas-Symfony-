@@ -19,3 +19,8 @@ body {
     width: 80%;
     margin-left: 10%;
 }
+
+.carousel img{
+    width: auto;
+    height: 920px;
+}
