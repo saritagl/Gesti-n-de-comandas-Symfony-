@@ -1,0 +1,27 @@
+{% extends 'main/index.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link href="{{ asset('css/menu.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    {% for category in categories %}
+        <ul class="col-md-12 food-list">
+            <li>
+                <h1>{{ category.name }}</h1>
+                <h4>{{ category.description }}</h4>
+            </li>
+            {% for item in menu if item.category.name == category.name %}
+                <li class="col-md-4 menu-item">
+                    <img width="250" height="250" src="http://s8.favim.com/orig/150719/chesse-food-papas-fritas-food-tumblr-Favim.com-2980299.jpg" alt="">
+                    <h3>{{ item.name }}</h3>
+                    <hr>
+                    {{ item.price }}
+                    {{ item.category.name }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+{% endblock %}
