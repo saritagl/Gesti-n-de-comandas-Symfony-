@@ -2,6 +2,9 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
+
 
 /**
  * @ORM\Entity
@@ -47,6 +50,16 @@ class Product
      * @ORM\OneToMany(targetEntity="InvoiceItem", mappedBy="product")
      */
     private $sales;
+
+    /**
+     * @ORM\Column(name="image_path", type="string", length=255, nullable=false)
+     */
+    private $image;
+
+    /**
+     * @Assert\File(maxSize="1M", mimeTypes={"image/png", "image/jpeg"})
+     */
+    private $file;
 
     /**
      * Get id
@@ -153,6 +166,31 @@ class Product
     {
         return $this->category;
     }
+
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    public function setImage($image)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    public function setFile($file)
+    {
+        $this->file = $file;
+
+        return $this;
+    }
+
     /**
      * Constructor
      */

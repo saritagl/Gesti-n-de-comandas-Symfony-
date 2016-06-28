@@ -7,6 +7,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\CallbackTransformer;
+
 
 class ProductEditType extends AbstractType
 {
@@ -25,6 +28,10 @@ class ProductEditType extends AbstractType
                 'choice_label' => 'name',
                 'choice_value' => 'id',
                 'label' => 'Categoría'))
+            ->add('file', FileType::class, array(
+                'data_class' => null,
+                'label' => 'Image (jpeg, png)',
+                'required' => false))
             ->add('save', SubmitType::class, array(
                 'label' => 'Guardar cambios'))
             ->add('delete', SubmitType::class, array(
@@ -41,4 +48,5 @@ class ProductEditType extends AbstractType
             'data_class' => 'AppBundle\Entity\Product'
         ));
     }
+
 }

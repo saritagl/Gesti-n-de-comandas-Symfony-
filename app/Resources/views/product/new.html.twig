@@ -9,7 +9,9 @@
         {{ form_row(form.price) }}
         {{ form_row(form.description) }}
         {{ form_row(form.category) }}
-
+        {{ form_label(form.file, '', {'label_attr': {'class': 'control-label'} }) }}
+        {{ form_errors(form.file) }}
+        {{ form_widget(form.file, {'attr': {'class': 'form-control-file'} }) }}
         <div class="form-group">
             <div>
                 <a  href="{{ path('product_index') }}" class="btn btn-default">Volver al listado</a>

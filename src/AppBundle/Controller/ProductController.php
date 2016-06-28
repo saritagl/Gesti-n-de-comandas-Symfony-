@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\Product;
 use AppBundle\Form\Product\ProductNewType;
 use AppBundle\Form\Product\ProductEditType;
+use Symfony\Component\HttpFoundation\File\File;
 
 
 /**
@@ -46,6 +47,23 @@ class ProductController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // $file stores the uploaded image file
+            $file = $product->getFile();
+
+            // Generate a unique name for the file before saving it
+            $fileName = md5(uniqid()).'.'.$product->getFile()->guessExtension();
+
+            // Move the file to the directory where image are stored
+            $file->move(
+                $this->container->getParameter('product_image_directory'),
+                $fileName
+            );
+
+            // Update the 'image' property to store the jpeg file name
+            // instead of its content
+            $product->setImage($fileName);
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($product);
             $em->flush();
@@ -94,6 +112,24 @@ class ProductController extends Controller
                 $em->flush();
                 return $this->redirectToRoute('product_index');
             } else {
+                // $file stores the uploaded image file
+                $file = $product->getFile();
+
+                // check whether a new image was uploaded.
+                if($file != null){
+                    // Generate a unique name for the file before saving it
+                    $fileName = md5(uniqid()).'.'.$product->getFile()->guessExtension();
+
+                    // Move the file to the directory where image are stored
+                    $file->move(
+                        $this->container->getParameter('product_image_directory'),
+                        $fileName
+                    );
+
+                    // Update the 'image' property to store the jpeg file name
+                    // instead of its content
+                    $product->setImage($fileName);
+                }
                 $em->flush();
                 return $this->redirectToRoute('product_show', array('id' => $product->getId()));
             }
@@ -103,6 +139,7 @@ class ProductController extends Controller
         return $this->render('product/edit.html.twig', array(
             'product' => $product,
             'form' => $editForm->createView(),
+            'image' => 'uploads/product/' . $product->getImage()
         ));
     }
 
