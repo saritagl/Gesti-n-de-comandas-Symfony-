@@ -8,13 +8,22 @@ body {
     background-color: #fff;
 }
 
-.form-login-div h3 {
+.form-login-div {
+    margin-top: 20px;
+    padding: 25px 20px 25px 20px;
+    border-radius: 0px;
+    border-color: #ddd;
+}
+
+.form-login-div h4 {
     margin-top: 10px;
     margin-bottom: 20px;
     text-align: center;
+    letter-spacing: 3px;
+    color: #333;
 }
 
-.form-login-div .btn-default {
+.form-login-div .btn-primary {
     cursor: pointer;
     padding: 7px 10px;
     width: 80%;
