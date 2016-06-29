@@ -10,12 +10,11 @@ body {
 .category-name {
     margin-top: 10px;
     margin-bottom: 15px;
-    text-align: center;
+    padding-left: 20px;
     letter-spacing: 4px;
 }
 
 .menu-item {
-    list-style-type: none;
     min-width: 360px;
     min-height: 240px;
     width: auto;
@@ -51,6 +50,7 @@ body {
 }
 
 .centerBlock {
-    display: table;
+    display: inline-block;
     margin: 0 auto;
+    width: auto;
 }
