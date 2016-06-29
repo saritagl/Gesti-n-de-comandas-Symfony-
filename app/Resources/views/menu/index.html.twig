@@ -2,26 +2,39 @@
 
 {% block stylesheets %}
     {{ parent() }}
-
     <link href="{{ asset('css/menu.css') }}" rel="stylesheet">
 {% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/menu.js') }}"></script>
+{% endblock %}
+
 {% block body %}
-    {% for category in categories %}
-        <ul class="col-md-12 food-list">
-            <li>
-                <h1>{{ category.name }}</h1>
-                <h4>{{ category.description }}</h4>
-            </li>
-            {% for item in menu if item.category.name == category.name %}
-                <li class="col-md-4 menu-item">
-                    <img width="250" height="250" src="{{ asset('uploads/product' )}}" alt="">
-                    <h3>{{ item.name }}</h3>
-                    <hr>
-                    {{ item.price }}
-                    {{ item.category.name }}
-                </li>
-            {% endfor %}
-        </ul>
-    {% endfor %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2 item-holder">
+                <div class="centerBlock">
+                {% for category in categories %}
+                    <div id="{{ category.id }}" class="container-fluid category-container">
+                        <div class="row category-name">
+                            <h3>{{ category.name }}</h3>
+                        </div>
+                        <div class="row">
+                        {% for item in category.products %}
+                            <div class="col-sm-6 menu-item">
+                                <div class="fader"></div>
+                                <img src="{{ asset('uploads/product/' ~ item.image )}}" alt="{{ item.name }}">
+                                <h3>{{ item.name }}</h3>
+                                <p>{{ item.price }}</p>
+                                <p>{{ item.description }}</p>
+                            </div>
+                        {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

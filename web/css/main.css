@@ -5,6 +5,7 @@ body {
 
 .navbar {
     opacity: 0.75;
+    background-color: #fff;
 }
 
 .form-login-div h3 {
@@ -20,10 +21,11 @@ body {
     margin-left: 10%;
 }
 
-#carousel-example-generic {
+.carousel {
     position: absolute;
-    top: 1px;
-    left: 1px;
+    top: 0;
+    left: 0;
+    opacity: 0;
 }
 
 .carousel img{
