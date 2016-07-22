@@ -109,7 +109,7 @@ class OrderController extends Controller
     public function closeAction(Request $request, Order $order)
     {
         $invoice = new Invoice();
-
+        $errors = False;
         if ($request->getMethod() == "POST") {
 
             $repository = $this->getDoctrine()->getRepository('AppBundle:Client');

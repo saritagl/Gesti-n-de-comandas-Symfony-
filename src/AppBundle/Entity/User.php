@@ -76,6 +76,11 @@ class User implements AdvancedUserInterface, \Serializable
 
 
     /**
+     * @ORM\OneToMany(targetEntity="Invoice", mappedBy="user")
+     */
+    private $invoices;
+
+    /**
      * @ORM\OneToMany(targetEntity="Order", mappedBy="user")
      */
     private $orders;

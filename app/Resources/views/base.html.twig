@@ -20,6 +20,7 @@
         {% block javascripts %}
             <script src="{{ asset('js/jquery.min.js') }}"></script>
             <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+            <script>baseurl="{{ app.request.baseUrl }}"</script>
         {% endblock %}
 
     </body>
