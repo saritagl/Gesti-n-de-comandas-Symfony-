@@ -87,7 +87,7 @@ class OrderController extends Controller
             $em = $this->getDoctrine()->getManager();
             $orderItem->setOrder($order);
             $order->setTotal($order->getTotal() +
-            $orderItem->getProduct()->getPrice() * $orderItem->getAmount());
+                ($orderItem->getProduct()->getPrice() * $orderItem->getAmount()) * 1.12);
             $em->persist($orderItem);
             $em->flush();
 

@@ -28,6 +28,16 @@ class Client
     private $name;
 
     /**
+     * @ORM\OneToMany(targetEntity="Invoice", mappedBy="client")
+     */
+    private $invoices;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Order", mappedBy="client")
+     */
+    private $orders;
+
+    /**
      * Get id
      *
      * @return integer
@@ -36,12 +46,7 @@ class Client
     {
         return $this->id;
     }
-
-    /**
-     * @ORM\OneToMany(targetEntity="Order", mappedBy="client")
-     */
-    private $Orders;
-
+    
 
     /**
      * Set ci

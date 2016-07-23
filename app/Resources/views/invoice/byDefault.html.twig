@@ -1,0 +1,59 @@
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th> #Nro</th>
+                <th> Mesa</th>
+                <th> Mesero</th>
+                <th> Cliente </th>
+                <th> Total</th>
+                <th> Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for row in rows %}
+            <tr>
+                <td>{{ row.id }}</td>
+                <td>{{ row.table }}</td>
+                <td>{{ row.server }}</td>
+                <td>{{ row.client }}</td>
+                <td>{{ row.total }}</td>
+                <td>
+                    <a class="btn-details" data-toggle="modal" data-target="#invoice-modal"  onclick="getDataDetails('{{ path('invoice_show', { 'id': row.id }) }}')">
+                        <i class="glyphicon glyphicon-search"></i>detalles
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<script>
+    function getDataDetails(path){
+        $('#invoice-modal .modal-body').html("");
+        $.get(path, function(data){
+                $('#invoice-modal .modal-body').html(data);
+            }
+        );
+    }
+</script>
+
+<!-- Modal -->
+<div class="modal fade" id="invoice-modal" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Detalles de Factura</h4>
+      </div>
+      <div class="modal-body"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>

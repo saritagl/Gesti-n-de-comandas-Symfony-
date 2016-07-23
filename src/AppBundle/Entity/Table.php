@@ -35,12 +35,12 @@ class Table
     private $isAvailable;
 
     /**
-     * @ORM\OneToMany(targetEntity="Order", mappedBy="table_")
+     * @ORM\OneToMany(targetEntity="Order", mappedBy="table")
      */
     private $orders;
 
     /**
-     * @ORM\OneToMany(targetEntity="Invoice", mappedBy="table_")
+     * @ORM\OneToMany(targetEntity="Invoice", mappedBy="table")
      */
     private $invoices;
 

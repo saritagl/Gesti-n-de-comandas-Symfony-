@@ -23,6 +23,22 @@ class InvoiceController extends Controller
     }
 
     /**
+     * Finds and displays a invoice.
+     *
+     * @Route("/{id}", name="invoice_show")
+     * @Method("GET")
+     */
+    public function showAction(Invoice $invoice)
+    {
+        $invoiceItems = $invoice->getItems();
+
+        return $this->render('invoice/show.html.twig', array(
+            'invoice' => $invoice,
+            'items' => $invoiceItems,
+        ));
+    }
+
+    /**
      * @Route("/{type}/{firstDay}/{lastDay}", name="invoice_report")
      * @Method({"GET"})
      */
