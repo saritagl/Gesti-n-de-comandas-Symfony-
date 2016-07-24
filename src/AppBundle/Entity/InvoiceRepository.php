@@ -49,7 +49,8 @@ class InvoiceRepository extends EntityRepository
                         JOIN i.table t
                         JOIN i.server s
                         JOIN i.client c
-                        WHERE i.createdAt >= :from_ AND i.createdAt <= :to_';
+                        WHERE i.createdAt >= :from_ AND i.createdAt <= :to_
+                        ORDER BY i.id';
                 break;
         }
 

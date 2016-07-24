@@ -22,7 +22,6 @@ class LoadFixtures implements FixtureInterface, ContainerAwareInterface
         $this->loadMenu($manager);
         $this->loadClients($manager);
         $this->loadTables($manager);
-        //$this->loadOrders($manager);
     }
 
     public function loadUsers(ObjectManager $manager)
@@ -38,14 +37,23 @@ class LoadFixtures implements FixtureInterface, ContainerAwareInterface
         $userAdmin->setEmail('admin@domain.com');
         $manager->persist($userAdmin);
 
-        $userServer = new User();
-        $userServer->setUsername('server');
-        $encodedPassword = $passwordEncoder->encodePassword($userServer, 'test');
-        $userServer->setPassword($encodedPassword);
-        $userServer->setRoles(array('server'));
-        $userServer->setLastRole('server');
-        $userServer->setEmail('server@domain.com');
-        $manager->persist($userServer);
+        $userServer1 = new User();
+        $userServer1->setUsername('server1');
+        $encodedPassword = $passwordEncoder->encodePassword($userServer1, 'test');
+        $userServer1->setPassword($encodedPassword);
+        $userServer1->setRoles(array('server'));
+        $userServer1->setLastRole('server');
+        $userServer1->setEmail('server1@domain.com');
+        $manager->persist($userServer1);
+
+        $userServer2 = new User();
+        $userServer2->setUsername('server2');
+        $encodedPassword = $passwordEncoder->encodePassword($userServer2, 'test');
+        $userServer2->setPassword($encodedPassword);
+        $userServer2->setRoles(array('server'));
+        $userServer2->setLastRole('server');
+        $userServer2->setEmail('server2@domain.com');
+        $manager->persist($userServer2);
 
         $manager->flush();
     }
@@ -194,13 +202,33 @@ class LoadFixtures implements FixtureInterface, ContainerAwareInterface
     {
         $clientBob = new Client();
         $clientBob->setCi('13900943');
-        $clientBob->setName('Bob');
+        $clientBob->setName('Bob Clain');
         $manager->persist($clientBob);
 
         $clientJohn = new Client();
         $clientJohn->setCi('18543800');
-        $clientJohn->setName('John');
+        $clientJohn->setName('John Smith');
         $manager->persist($clientJohn);
+
+        $clientAlice = new Client();
+        $clientAlice->setCi('896800');
+        $clientAlice->setName('Alice Taylor');
+        $manager->persist($clientAlice);
+
+        $clientBeth = new Client();
+        $clientBeth->setCi('1968050');
+        $clientBeth->setName('Beth Jones');
+        $manager->persist($clientBeth);
+
+        $clientJoseph = new Client();
+        $clientJoseph->setCi('1690050');
+        $clientJoseph->setName('Joseph Green');
+        $manager->persist($clientJoseph);
+
+        $clientKenneth = new Client();
+        $clientKenneth->setCi('25908050');
+        $clientKenneth->setName('Kenneth Wood');
+        $manager->persist($clientKenneth);
 
         $manager->flush();
     }
@@ -217,6 +245,18 @@ class LoadFixtures implements FixtureInterface, ContainerAwareInterface
         $tableTwo->setChairNumber(6);
         $tableTwo->setIsAvailable(True);
         $manager->persist($tableTwo);
+
+        $tableThree = new Table();
+        $tableThree->setNumber(3);
+        $tableThree->setChairNumber(4);
+        $tableThree->setIsAvailable(True);
+        $manager->persist($tableThree);
+
+        $tableFour = new Table();
+        $tableFour->setNumber(4);
+        $tableFour->setChairNumber(6);
+        $tableFour->setIsAvailable(True);
+        $manager->persist($tableFour);
 
         $manager->flush();
     }
