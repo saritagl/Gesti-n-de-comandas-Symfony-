@@ -1,4 +1,6 @@
-$('#search-btn').click(getClientName);
+$('#search-btn').click(function(){
+    getClientName();
+});
 
 $('#client-ci').on('keypress', function(evt){
     if(evt.keyCode == 13){
@@ -9,7 +11,7 @@ $('#client-ci').on('keypress', function(evt){
 });
 
 function getClientName(){
-    $.get('/client/' + $('#client-ci').val() + '/ci',
+    $.get(baseurl + '/client/' + $('#client-ci').val() + '/ci',
     {
         attr: 'name'
     },

@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class ProductNewType extends AbstractType
 {
@@ -23,7 +24,10 @@ class ProductNewType extends AbstractType
             ->add('category', EntityType::class, array(
                 'class' => 'AppBundle:Category',
                 'choice_label' => 'name',
-                'choice_value' => 'name',))
+                'choice_value' => 'name',
+                'label' => 'Categoría'))
+            ->add('file', FileType::class, array(
+                'label' => 'Imagen (jpeg)'))
             ->add('save', SubmitType::class, array(
                 'label' => 'Crear registro',))
         ;

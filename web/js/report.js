@@ -59,7 +59,7 @@ $('#submit').click(function() {
     to = $('#picker-to').data("DateTimePicker").date().unix();
     qtype = $('#type').val();
 
-    $.get('/invoice/' + qtype + '/' + from + '/' + to,
+    $.get(baseurl + '/invoice/' + qtype + '/' + from + '/' + to,
     function(data, status){
         $('#report').html(data);
     });

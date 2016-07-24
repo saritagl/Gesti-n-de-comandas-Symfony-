@@ -35,3 +35,12 @@ label {
     color: #ef7359;
     background-color: #FEFEFE;
 }
+
+.img-prod {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.form-control-file{
+    margin-bottom: 10px;
+}

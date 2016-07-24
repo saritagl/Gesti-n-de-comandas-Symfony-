@@ -5,16 +5,31 @@
 {% block panel_body %}
 
     {{ form_start(form) }}
-        {{ form_row(form.name) }}
-        {{ form_row(form.price) }}
-        {{ form_row(form.description) }}
-        {{ form_row(form.category) }}
-
-        <div class="form-group">
-            <div>
-                <a href="{{ path('product_index') }}" class="btn btn-default">Volver al listado</a>
-                {{ form_widget(form.save, {'attr': {'class': 'btn btn-default'}}) }}
-                {{ form_widget(form.delete, {'attr': {'class': 'btn btn-default'}}) }}
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                    {{ form_row(form.name) }}
+                    {{ form_row(form.price) }}
+                    {{ form_row(form.category) }}
+                </div>
+                <div class="col-md-6">
+                    <img class="img-prod" src="{{ asset(image) }}" />
+                    {{ form_widget(form.file) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    {{ form_row(form.description) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-12">
+                    <div>
+                        <a href="{{ path('product_index') }}" class="btn btn-default">Volver al listado</a>
+                        {{ form_widget(form.save, {'attr': {'class': 'btn btn-default'}}) }}
+                        {{ form_widget(form.delete, {'attr': {'class': 'btn btn-default'}}) }}
+                    </div>
+                </div>
             </div>
         </div>
     {{ form_end(form) }}

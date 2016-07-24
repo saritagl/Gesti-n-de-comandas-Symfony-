@@ -1,0 +1,51 @@
+
+<div>
+    <div class="row">
+        <div class="col-md-4">
+            <p> Número: {{ invoice.id }}</p>
+        </div>
+        <div class="col-md-4">
+            <p> Mesa: {{ invoice.table.number }}</p>
+        </div>
+        <div class="col-md-4">
+            <p> Total: {{ invoice.total }}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <p> Mesonero: {{ invoice.server.username }}</p>
+        </div>
+        <div class="col-md-4">
+            <p> Cliente: {{ invoice.client.name }}</p>
+        </div>
+        <div class="col-md-4">
+            <p> Fecha: {{ invoice.createdAt|date('Y-m-d') }} </p>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th> Cantidad</th>
+                    <th> Producto</th>
+                    <th> IVA</th>
+                    <th> SubTotal</th>
+                    <th> Total</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for item in items %}
+                <tr>
+                    <td>{{ item.amount }}</td>
+                    <td>{{ item.product.name }}</td>
+                    <td>{{ item.product.price * item.amount * 0.12 }}</td>
+                    <td>{{ item.product.price * item.amount }}</td>
+                    <td>{{ item.product.price * item.amount * 1.12 }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>

@@ -7,6 +7,7 @@ imports:
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
+    product_image_directory: '%kernel.root_dir%/../web/uploads/product'
 
 framework:
     #esi:             ~
@@ -36,6 +37,8 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    globals:
+        product_image_directory: '%product_image_directory%'
 
 # Doctrine Configuration
 doctrine:
@@ -66,11 +69,3 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
-
-# Minimal Assetic Configuration
-assetic:
-    debug: '%kernel.debug%'
-    use_controller: '%kernel.debug%'
-    filters:
-        scssphp:
-            formatter: 'Leafo\ScssPhp\Formatter\Compressed'

@@ -29,6 +29,12 @@ class Order
     private $server;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Client", inversedBy="orders")
+     * @ORM\JoinColumn(name="client_id", referencedColumnName="id")
+     */
+    private $client;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Table", inversedBy="orders")
      * @ORM\JoinColumn(name="table_id", referencedColumnName="id")
      */

@@ -87,7 +87,7 @@ class OrderController extends Controller
             $em = $this->getDoctrine()->getManager();
             $orderItem->setOrder($order);
             $order->setTotal($order->getTotal() +
-            $orderItem->getProduct()->getPrice() * $orderItem->getAmount());
+                ($orderItem->getProduct()->getPrice() * $orderItem->getAmount()) * 1.12);
             $em->persist($orderItem);
             $em->flush();
 
@@ -109,7 +109,7 @@ class OrderController extends Controller
     public function closeAction(Request $request, Order $order)
     {
         $invoice = new Invoice();
-
+        $errors = False;
         if ($request->getMethod() == "POST") {
 
             $repository = $this->getDoctrine()->getRepository('AppBundle:Client');
